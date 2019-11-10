@@ -1,6 +1,7 @@
 
 public class DFS {
 	public boolean DFS(Graph g) {
+		//initializes all nodes in the graph
 		for(Node n: g.vertex.children) {
 			n.color = "white";
 			n.parent = null;
