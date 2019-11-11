@@ -2,7 +2,7 @@
 public class DFS {
 	public boolean DFS(Graph g) {
 		//initializes all nodes in the graph
-		for(Node n: g.vertex.children) {
+		for(Node n: g.getVertex().getChildren()) {
 			n.color = "white";
 			n.parent = null;
 			n.time = 0;
