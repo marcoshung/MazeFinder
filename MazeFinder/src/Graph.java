@@ -4,6 +4,7 @@ public class Graph {
 	LinkedList[] graph = new LinkedList[10];
 	int time = 0;
 	Node vertex;
+	int car;
 	
 	
 	//public Graph(Node vertex) {
@@ -28,6 +29,7 @@ public class Graph {
 			}
 		}
 		return false;
+		//blah blah
 	}
 
 	
