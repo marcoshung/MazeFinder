@@ -9,10 +9,20 @@ public class Node {
 	public int dist;
 	public String color;
 	
-	public Node(int id, String color) {
+	public Node(int id) {
 		this.id = id;
-		this.color = color;
 	}
 	
+	public void addNeighbor(Node n) {
+		neighbors.add(n);
+	}
 	
+	public void printList() {
+		System.out.print(id + " ");
+		int i = 0;
+		while(!neighbors.isEmpty()) {
+			System.out.print("-> " + neighbors.get(i));
+			i++;
+		}
+	}
 }
