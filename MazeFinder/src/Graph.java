@@ -1,7 +1,7 @@
 import java.util.LinkedList;
 
 public class Graph {
-	//testing method
+	//testing method with test cases
 	public static void main(String[] args) {
 		Node nodes1 = new Node(1);
 		Node nodes2 = new Node(2);
