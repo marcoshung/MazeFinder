@@ -2,30 +2,30 @@
 public class BFS {
 	
 	public void BFS(Graph g) {
-		for(Node n: g.getVertex().getNeighbors()) {
-			n.setColor("white");
-			n.setParent(null);
-			n.setDistance(Integer.MAX_VALUE);
+		for(Node n: g.vertex.neighbors) {
+			n.color = "white";
+			n.parent = null;
+			n.dist = (Integer.MAX_VALUE);
 		}
 		
-		Node source=g.getVertex();
-		source.setColor("gray");
-		source.setDistance(0);
-		source.setParent(null);
+		Node source = g.getVertex();
+		source.color = "gray";
+		source.dist = 0;
+		source.parent = null;
 		
 		Queue q=new Queue(source);
 		//blah
 		while(q.getSize()!=0) {
 			Node u=q.dequeue();
-			for(Node v:u.getNeighbors()) {
-				if(v.getColor().equals("white")) {
-					v.setColor("gray");
-					v.setDistance(u.getDistance()+1);
-					v.setParent(u);
+			for(Node v:u.neighbors) {
+				if(v.color.equals("white")) {
+					v.color = "gray";
+					v.dist = u.dist+1;
+					v.parent = u;
 					q.enqueue(v);
 				}
 			}
-			u.setColor("black");
+			u.color = ("black");
 		}
 	}
 
