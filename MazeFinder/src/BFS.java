@@ -2,6 +2,7 @@
 public class BFS {
 	
 	public void BFS(Graph g) {
+		//initializes all 
 		for(Node n: g.vertex.neighbors) {
 			n.color = "white";
 			n.parent = null;

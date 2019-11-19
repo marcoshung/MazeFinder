@@ -4,4 +4,8 @@ public class Generator {
 		System.out.print("hi");
 		
 	}
+	
+	public void makeMaze(int n) {
+		
+	}
 }
