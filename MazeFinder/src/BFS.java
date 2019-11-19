@@ -3,10 +3,11 @@ public class BFS {
 	
 	public void BFS(Graph g) {
 		//initializes all 
-		for(Node n: g.vertex.neighbors) {
+		for(int i = 0; i < g.graph.length; i++) {
+			Node n = g.graph[i];
 			n.color = "white";
 			n.parent = null;
-			n.dist = (Integer.MAX_VALUE);
+			n.dist = Integer.MAX_VALUE;
 		}
 		
 		Node source = g.getVertex();
