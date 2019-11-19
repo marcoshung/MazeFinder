@@ -1,7 +1,7 @@
 
 public class BFS {
 	
-	public void BFS(Graph g) {
+	public static void BFS(Graph g) {
 		//initializes all 
 		for(int i = 0; i < g.graph.length; i++) {
 			Node n = g.graph[i];
@@ -29,6 +29,12 @@ public class BFS {
 			}
 			u.color = ("black");
 		}
+		//tester
+		for(int i = 0; i < g.graph.length; i++) {
+			System.out.println(g.graph[i].id + " " + g.graph[i].discovery + " " +g.graph[i].fin);
+		}
 	}
+	
+	
 
 }

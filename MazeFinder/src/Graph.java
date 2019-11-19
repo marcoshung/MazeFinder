@@ -21,6 +21,8 @@ public class Graph {
 		test.graph = testers;
 		
 		DFS.DFS(test);
+		BFS.BFS(test);
+		
 	}
 	
 	Node[] graph = new Node[3];
