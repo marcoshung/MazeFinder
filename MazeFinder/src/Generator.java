@@ -16,31 +16,31 @@ public class Generator {
 		Cell[][] maze=new Cell[r][r];
 		int totalCells=r*r;
 		//Creating 2d array that has cells with x and y coordinates
-		for(int i=1;i<=r;i++) {
-			for(int j=1;j<=r;j++) {
+		for(int i=0;i<r;i++) {
+			for(int j=0;j<r;j++) {
 				maze[i][j]=new Cell(i,j);
 			}
 		}
-		//start generating maze from starting position at (1,1)
-		Cell current=maze[1][1];
+		//start generating maze from starting position at (0,0)
+		Cell current=maze[0][0];
 		//keep track of visited cells 1---> r*r
 		int visited=1;
 		
 		//create start and finish
-		maze[1][1].top=false;
-		maze[r][r].bottom=false;
+		maze[0][0].top=false;
+		maze[r-1][r-1].bottom=false;
 		
 		//start knocking down walls
 		while(visited<totalCells) {
 			//list to store all neighbors of current regardless of how many walls
 			List<Cell> neighbors=new ArrayList<>();
-			if((current.x-1)>0) 
+			if((current.x)>0) 
 				neighbors.add(maze[current.x-1][current.y]);
-			if((current.y+1)<=r) 
+			if((current.y)<r) 
 				neighbors.add(maze[current.x][current.y+1]);
-			if((current.x+1)<=r) 
+			if((current.x)<r) 
 				neighbors.add(maze[current.x+1][current.y]);
-			if((current.y-1)>0) 
+			if((current.y)>0) 
 				neighbors.add(maze[current.x][current.y-1]);
 			
 			//delete cells without all walls intact
@@ -84,7 +84,7 @@ public class Generator {
 				
 				//push current cell into cellStack
 				cellLocation.push(maze[xCoor1][yCoor1]);
-				current=next;
+				current=maze[xCoor2][yCoor2];
 				visited+=1;
 			
 			}
