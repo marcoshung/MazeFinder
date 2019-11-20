@@ -5,13 +5,21 @@ import java.util.Stack;
 
 public class Generator {
 	public static void main(String[] args) {
-		System.out.print("hi");
+		//System.out.print("hi");
+		Cell[][] maze=makeMaze(4);
+		for(int i=0;i<maze.length;i++) {
+			for(int j=0;j<maze.length;j++) {
+				System.out.println(maze[i][j].x+", "+maze[i][j].y);
+				System.out.println(maze[i][j].top+", "+maze[i][j].bottom+", "+maze[i][j].left+", "+maze[i][j].right);
+			}
+		}
+			
 		
 	}
 	
 	//returns a perfect maze 
 	//input: number of rows
-	public Cell[][] makeMaze(int r) {
+	public static Cell[][] makeMaze(int r) {
 		Stack<Cell> cellLocation=new Stack<>();
 		Cell[][] maze=new Cell[r][r];
 		int totalCells=r*r;
@@ -36,9 +44,9 @@ public class Generator {
 			List<Cell> neighbors=new ArrayList<>();
 			if((current.x)>0) 
 				neighbors.add(maze[current.x-1][current.y]);
-			if((current.y)<r) 
+			if((current.y)<r-1) 
 				neighbors.add(maze[current.x][current.y+1]);
-			if((current.x)<r) 
+			if((current.x)<r-1) 
 				neighbors.add(maze[current.x+1][current.y]);
 			if((current.y)>0) 
 				neighbors.add(maze[current.x][current.y-1]);
@@ -54,7 +62,7 @@ public class Generator {
 			Random rand=new Random();
 			
 			if(neighbors.size()>0) {
-				Cell next=neighbors.get(rand.nextInt(neighbors.size()-1));
+				Cell next=neighbors.get(rand.nextInt(neighbors.size()));
 				//Update Maze with new walls broken down
 				
 				//find the location on 2d array
