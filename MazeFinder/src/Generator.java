@@ -13,7 +13,41 @@ public class Generator {
 				System.out.println(maze[i][j].top+", "+maze[i][j].bottom+", "+maze[i][j].left+", "+maze[i][j].right);
 			}
 		}
-			
+		//print maze
+		for(int i = 0; i < maze.length;i++) {
+			for(int j = 0; j < maze[i].length; j++) {
+				System.out.print("+");
+				if(maze[j][i].top == true) {
+					System.out.print("-");
+				}else {
+					System.out.print(" ");
+				}
+			}
+
+			System.out.print("+");
+			System.out.println();
+			for(int j = 0; j < maze[i].length; j++) {
+				if(maze[j][i].left = true) {
+					System.out.print("|");
+				}else {
+					System.out.print(" ");
+				}
+				System.out.print(" ");
+			}
+			if(maze[i][maze[i].length - 1].right = true) {
+				System.out.print("|");
+			}
+			System.out.println();
+		}
+		for(int i = 0; i < maze[maze.length - 1].length; i++) {
+			System.out.print("+");
+			if(maze[maze.length -1][i].bottom == true) {
+				System.out.print("-");
+			}else {
+				System.out.print(" ");
+			}
+		}
+		System.out.print("+");
 		
 	}
 	
