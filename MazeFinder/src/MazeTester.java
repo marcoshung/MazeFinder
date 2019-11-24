@@ -59,11 +59,13 @@ class MazeTester {
 		
 		
 		//2. Reading from sample files and solving
-		BufferedReader testCase1=new BufferedReader(new FileReader("max4.txt"));
+		/*BufferedReader testCase1=new BufferedReader(new FileReader("max4.txt"));
+		
 		String testLine = testCase1.readLine();
 		String[] dimensions=testLine.split("\\s+");
 		int r=Integer.parseInt(dimensions[0]);
 		Maze tester5=new Maze(r);
+		*/
 		
 		
 		

@@ -363,7 +363,7 @@ public class Maze {
 	
 	
 	////////////////////////////////////////////////////////////////
-	public void readMazeFile(BufferedReader readMaze) throws IOException {
+	/*public void readMazeFile(BufferedReader readMaze) throws IOException {
 		
 		Maze rMaze=new Maze(r);
 		for(int i=0;i<r;i++) {
@@ -399,6 +399,7 @@ public class Maze {
 		rMaze.maze[r-1][r-1].bottom=false;
 		rMaze.printMaze();
 	}
+	*/
 	
 	
 		
