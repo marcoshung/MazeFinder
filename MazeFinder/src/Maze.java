@@ -1,5 +1,7 @@
 
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -61,32 +63,6 @@ public class Maze {
 		
 	}
 	
-	/*public void knockDownWall1(Cell c, Cell n) {
-		int x1=c.x;
-		int x2=n.x;
-		int y1=c.y;
-		int y2=n.y;
-		
-		if(x1<r-1 && x1==x2-1) {
-			maze[x1][y1].bottom=false;
-			maze[x2][y2].top=false;
-		}
-		else if(y1<r-1 && y1==y2-1) {
-			maze[x1][y1].right=false;
-			maze[x2][y2].left=false;
-		}
-		else if(x1>0 && x1==x2+1) {
-			maze[x1][y1].top=false;
-			maze[x2][y2].bottom=true;
-		}
-		else if(y1>0 && y1==y2+1) {
-			maze[x1][y1].left=false;
-			maze[x2][y2].right=false;
-		}
-	}
-	*/
-	
-	
 	
 	public void knockDownWall(Cell c, Cell n) {
 		if (c.x == n.x) { // same row
@@ -127,7 +103,7 @@ public class Maze {
 	}
 	
 	
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		Maze tester=new Maze(4);
 		tester.generateMaze();
 		tester.printMaze();
@@ -135,6 +111,7 @@ public class Maze {
 		tester.BFS();
 		
 	}
+	*/
 	
 	public void printMaze() {
 		for(int i = 0; i < maze.length;i++) {
@@ -182,48 +159,45 @@ public class Maze {
 	public void printMazePath() {
 		for(int i = 0; i < maze.length;i++) {
 			for(int j = 0; j < maze.length; j++) {
-				System.out.print("+ ");
+				System.out.print("+");
 				if(maze[i][j].top == true) {
-					System.out.print("- ");
+					System.out.print("-");
 				}else {
-					System.out.print("  ");
+					System.out.print(" ");
 				}
 			}
 
-			System.out.print("+ ");
+			System.out.print("+");
 			System.out.println();
 			for(int j = 0; j < maze.length; j++) {
 				if(maze[i][j].left == false) {
-					System.out.print("  ");
+					System.out.print(" ");
 				}
 				else if(maze[i][j].left == true) {
-					System.out.print("| ");
+					System.out.print("|");
 				}
 				if(maze[i][j].disc!=0) {
-					if(maze[i][j].disc>9)
-						System.out.print(maze[i][j].disc);
-					else
-						System.out.print(" "+maze[i][j].disc);
+					System.out.print(maze[i][j].disc%10);
 				}	
 				else
-					System.out.print("  ");
+					System.out.print(" ");
 			}
 			
 			
 			if(maze[i][maze[i].length - 1].right == true) {
-				System.out.print("| ");
+				System.out.print("|");
 			}
 			System.out.println();
 		}
 		for(int i = 0; i < maze[maze.length - 1].length; i++) {
-			System.out.print("+ ");
+			System.out.print("+");
 			if(maze[maze.length -1][i].bottom == true) {
-				System.out.print("- ");
+				System.out.print("-");
 			}else {
-				System.out.print("  ");
+				System.out.print(" ");
 			}
 		}
-		System.out.print("+ ");
+		System.out.print("+");
 		
 		
 	}
@@ -331,9 +305,9 @@ public class Maze {
 		}
 		last.shortest=true;
 		
-		System.out.println("\n DFS:");
+		System.out.println("\n\n DFS:");
 		printMazePath();
-		System.out.println("\n DFS:");
+		System.out.println("\n");
 		printMazeShortest();
 		
 	}
@@ -380,11 +354,50 @@ public class Maze {
 		}
 		last.shortest=true;
 		
-		System.out.println("\n BFS:");
+		System.out.println("\n\n BFS:");
 		printMazePath();
-		System.out.println("\n BFS:");
+		System.out.println("\n");
 		printMazeShortest();
 		
+	}
+	
+	
+	////////////////////////////////////////////////////////////////
+	public void readMazeFile(BufferedReader readMaze) throws IOException {
+		
+		Maze rMaze=new Maze(r);
+		for(int i=0;i<r;i++) {
+			String[] line;
+			testLine=readMaze.readLine();
+			line=testLine.split("");
+			for(int j=0;j<r;j++) {
+				if(line[j*2+1].equals(" ")) {
+					if(i==0)
+						rMaze.maze[i][j].top=false;
+					else {
+						rMaze.maze[i][j].top=false;
+						rMaze.maze[i-1][j].bottom=false;
+					}
+			}
+				
+		}
+			testLine=readMaze.readLine();
+			line=testLine.split("");
+			for(int j=0;j<r;j++) {
+				if(line[j*2].equals(" ")) {
+					if(j==0)
+						rMaze.maze[i][j].left=false;
+					else {
+						rMaze.maze[i][j].left=false;
+						rMaze.maze[i][j-1].right=false;
+					}
+			}
+				
+		}
+			
+	}
+		rMaze.maze[r-1][r-1].bottom=false;
+		rMaze.printMaze();
 	}
 	
 	
