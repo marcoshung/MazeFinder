@@ -6,8 +6,9 @@ import java.util.Random;
 import java.util.Stack;
 
 public class Generator {
+
 	public static void main(String[] args) {
-		Cell[][] maze=makeMaze(4);
+		Cell[][] maze=makeMaze(8);
 		for(int i=0;i<maze.length;i++) {
 			for(int j=0;j<maze.length;j++) {
 				System.out.println(maze[i][j].x+", "+maze[i][j].y);
@@ -61,7 +62,7 @@ public class Generator {
 	public static Cell[][] makeMaze(int r) {
 		Stack<Cell> cellLocation=new Stack<>();
 		Cell[][] maze=new Cell[r][r];
-		int totalCells=r*r;
+		int totalCells=r*r -1;
 		//Creating 2d array that has cells with x and y coordinates
 		for(int i=0;i<r;i++) {
 			for(int j=0;j<r;j++) {
@@ -81,13 +82,13 @@ public class Generator {
 		while(visited<totalCells) {
 			//list to store all neighbors of current regardless of how many walls
 			List<Cell> neighbors=new ArrayList<>();
-			if((current.x)>0) 
+			if((current.x)>0 && checkNeighborWalls(maze[current.x -1 ][current.y])) 
 				neighbors.add(maze[current.x-1][current.y]);
-			if((current.y)<r-1) 
+			if((current.y)<r-1 && checkNeighborWalls(maze[current.x][current.y+1])) 
 				neighbors.add(maze[current.x][current.y+1]);
-			if((current.x)<r-1) 
+			if((current.x)<r-1 && checkNeighborWalls(maze[current.x+1][current.y])) 
 				neighbors.add(maze[current.x+1][current.y]);
-			if((current.y)>0) 
+			if((current.y)>0 && checkNeighborWalls(maze[current.x][current.y - 1]) )
 				neighbors.add(maze[current.x][current.y-1]);
 			
 			//delete cells without all walls intact
@@ -100,7 +101,11 @@ public class Generator {
 			}
 			Random rand=new Random();
 			
-			if(neighbors.size()>0) {
+			if(neighbors.size()>= 1) {
+
+				//push current cell into cellStack
+				cellLocation.push(maze[current.x][current.y]);
+				
 				Cell next=neighbors.get(rand.nextInt(neighbors.size()));
 				System.out.println(next.x+" "+next.y);
 				//Update Maze with new walls broken down
@@ -132,8 +137,6 @@ public class Generator {
 					maze[xCoor2][yCoor2].right=false;
 				}
 				
-				//push current cell into cellStack
-				cellLocation.push(maze[xCoor1][yCoor1]);
 				current=maze[xCoor2][yCoor2];
 				visited+=1;
 			
@@ -155,6 +158,10 @@ public class Generator {
 		
 	
 		 return maze;
+	}
+	
+	public static boolean checkNeighborWalls(Cell c) {
+		return c.top && c.bottom && c.left && c.right; 
 	}
 }
 
