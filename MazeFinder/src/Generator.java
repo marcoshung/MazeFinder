@@ -8,7 +8,7 @@ import java.util.Stack;
 public class Generator {
 
 	public static void main(String[] args) {
-		Cell[][] maze=makeMaze(8);
+		Cell[][] maze=makeMaze(10);
 		for(int i=0;i<maze.length;i++) {
 			for(int j=0;j<maze.length;j++) {
 				System.out.println(maze[i][j].x+", "+maze[i][j].y);
@@ -62,7 +62,7 @@ public class Generator {
 	public static Cell[][] makeMaze(int r) {
 		Stack<Cell> cellLocation=new Stack<>();
 		Cell[][] maze=new Cell[r][r];
-		int totalCells=r*r -1;
+		int totalCells=r*r-1;
 		//Creating 2d array that has cells with x and y coordinates
 		for(int i=0;i<r;i++) {
 			for(int j=0;j<r;j++) {
@@ -76,7 +76,6 @@ public class Generator {
 		
 		//create start and finish
 		maze[0][0].top=false;
-		maze[r-1][r-1].bottom=false;
 		
 		//start knocking down walls
 		while(visited<totalCells) {
@@ -90,21 +89,12 @@ public class Generator {
 				neighbors.add(maze[current.x+1][current.y]);
 			if((current.y)>0 && checkNeighborWalls(maze[current.x][current.y - 1]) )
 				neighbors.add(maze[current.x][current.y-1]);
-			
-			//delete cells without all walls intact
-			for(int k=0;k<neighbors.size();k++) {
-				Cell temp=neighbors.get(k);
-				if(!(temp.bottom=true && temp.top==true && temp.left==true && temp.right==true)) {
-					neighbors.remove(k);
-					k--;
-				}
-			}
+		
 			Random rand=new Random();
 			
-			if(neighbors.size()>= 1) {
+			if(neighbors.size()> 0) {
 
 				//push current cell into cellStack
-				cellLocation.push(maze[current.x][current.y]);
 				
 				Cell next=neighbors.get(rand.nextInt(neighbors.size()));
 				System.out.println(next.x+" "+next.y);
@@ -137,6 +127,7 @@ public class Generator {
 					maze[xCoor2][yCoor2].right=false;
 				}
 				
+				cellLocation.push(maze[current.x][current.y]);
 				current=maze[xCoor2][yCoor2];
 				visited+=1;
 			
