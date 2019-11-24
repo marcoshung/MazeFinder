@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 //represents on cell in the maze
 public class Cell {
 	
@@ -9,6 +11,8 @@ public class Cell {
 	boolean bottom;
 	boolean right;
 	boolean left;
+	
+	LinkedList<Cell> neighbors;
 
 	
 	public Cell(int x, int y) {

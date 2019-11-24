@@ -1,3 +1,5 @@
+
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -5,7 +7,6 @@ import java.util.Stack;
 
 public class Generator {
 	public static void main(String[] args) {
-		//System.out.print("hi");
 		Cell[][] maze=makeMaze(4);
 		for(int i=0;i<maze.length;i++) {
 			for(int j=0;j<maze.length;j++) {
@@ -15,9 +16,9 @@ public class Generator {
 		}
 		//print maze
 		for(int i = 0; i < maze.length;i++) {
-			for(int j = 0; j < maze[i].length; j++) {
+			for(int j = 0; j < maze.length; j++) {
 				System.out.print("+");
-				if(maze[j][i].top == true) {
+				if(maze[i][j].top == true) {
 					System.out.print("-");
 				}else {
 					System.out.print(" ");
@@ -26,15 +27,18 @@ public class Generator {
 
 			System.out.print("+");
 			System.out.println();
-			for(int j = 0; j < maze[i].length; j++) {
-				if(maze[j][i].left = true) {
-					System.out.print("|");
-				}else {
+			for(int j = 0; j < maze.length; j++) {
+				if(maze[i][j].left == false) {
 					System.out.print(" ");
+				}
+				else if(maze[i][j].left == true) {
+					System.out.print("|");
 				}
 				System.out.print(" ");
 			}
-			if(maze[i][maze[i].length - 1].right = true) {
+			
+			
+			if(maze[i][maze[i].length - 1].right == true) {
 				System.out.print("|");
 			}
 			System.out.println();
@@ -48,6 +52,7 @@ public class Generator {
 			}
 		}
 		System.out.print("+");
+		
 		
 	}
 	
@@ -97,6 +102,7 @@ public class Generator {
 			
 			if(neighbors.size()>0) {
 				Cell next=neighbors.get(rand.nextInt(neighbors.size()));
+				System.out.println(next.x+" "+next.y);
 				//Update Maze with new walls broken down
 				
 				//find the location on 2d array
@@ -106,7 +112,9 @@ public class Generator {
 				//location of current 
 				int xCoor1=current.x;
 				int yCoor1=current.y;
+				
 				//knock down the wall between current and next cell in 2d array
+				
 				if(xCoor1==(xCoor2-1)) {
 					maze[xCoor1][yCoor1].bottom=false;
 					maze[xCoor2][yCoor2].top=false;
@@ -136,6 +144,17 @@ public class Generator {
 				
 			
 		}
+		//close bottom
+		for(int i=0;i<r;i++) {
+			if(i==r-1)
+				maze[r-1][r-1].bottom=false;
+			else
+				maze[r-1][i].bottom=true;
+				
+		}
+		
+	
 		 return maze;
 	}
 }
+

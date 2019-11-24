@@ -21,7 +21,7 @@ public class Graph {
 		test.graph = testers;
 		
 		DFS.DFS(test);
-		BFS.BFS(test);
+		//BFS.BFS(test);
 		
 	}
 	
