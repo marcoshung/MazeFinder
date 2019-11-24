@@ -21,9 +21,6 @@ public class Cell {
 	
 	//true if part of shortest path
 	boolean shortest;
-	
-	
-	LinkedList<Cell> neighbors;
 
 	
 	public Cell(int x, int y) {

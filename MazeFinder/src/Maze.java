@@ -1,7 +1,9 @@
 
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Random;
 import java.util.Stack;
 
@@ -126,10 +128,11 @@ public class Maze {
 	
 	
 	public static void main(String[] args) {
-		Maze tester=new Maze(8);
+		Maze tester=new Maze(4);
 		tester.generateMaze();
 		tester.printMaze();
 		tester.DFS();
+		tester.BFS();
 		
 	}
 	
@@ -175,6 +178,7 @@ public class Maze {
 		
 	}
 	
+	//can also do mod
 	public void printMazePath() {
 		for(int i = 0; i < maze.length;i++) {
 			for(int j = 0; j < maze.length; j++) {
@@ -289,11 +293,23 @@ public class Maze {
 	
 	
 	public  void DFS() {
+	///reset
+		time=0;
+			for(int i=0;i<maze.length;i++) {
+				for(int j=0;j<maze[0].length;j++) {
+					maze[i][j].color="white";
+					maze[i][j].disc=0;
+					maze[i][j].parent=null;
+					maze[i][j].shortest=false;
+
+				}
+			}		
 		Cell c=maze[0][0];
 		Stack<Cell> dfsStack=new Stack<>();
 		dfsStack.push(c);
+		current=c;
 		
-		while(dfsStack.size()>0 && !(current.equals(maze[r-1][r-1]))) {
+		while(dfsStack.size()>0 && !(current.equals(allCells.get(allCells.size()-1)))) {
 			current=dfsStack.pop();
 			current.color="black";
 			time++;
@@ -304,8 +320,56 @@ public class Maze {
 					next.color="grey";
 					next.parent=current;
 					dfsStack.add(next);
-				}
-					
+				}		
+			}
+		}
+		//backtrack 
+		Cell last=current;
+		while(last!=allCells.get(0)) {
+			last.shortest=true;
+			last=last.parent;
+		}
+		last.shortest=true;
+		
+		System.out.println("\n DFS:");
+		printMazePath();
+		System.out.println("\n DFS:");
+		printMazeShortest();
+		
+	}
+
+	////////////////////////////////////////////////////////////////////
+	//BFS Solution
+	
+	public  void BFS() {
+		
+		///reset
+		time=0;
+		for(int i=0;i<maze.length;i++) {
+			for(int j=0;j<maze[0].length;j++) {
+				maze[i][j].color="white";
+				maze[i][j].disc=0;
+				maze[i][j].parent=null;
+				maze[i][j].shortest=false;
+			}
+		}
+		Cell c=maze[0][0];
+		Queue<Cell> bfsQueue=new LinkedList<>();
+		bfsQueue.add(c);
+		current=c;
+		
+		while(bfsQueue.size()>0 && !(current.equals(allCells.get(allCells.size()-1)))) {
+			current=bfsQueue.remove();
+			current.color="black";
+			time++;
+			current.disc=time;
+
+			for(Cell next: findAdjacent(current)) {
+				if(next.color=="white") {
+					next.color="grey";
+					next.parent=current;
+					bfsQueue.add(next);
+				}	
 			}
 		}
 		//backtrack 
@@ -316,9 +380,9 @@ public class Maze {
 		}
 		last.shortest=true;
 		
-		System.out.println("\n DFS:");
+		System.out.println("\n BFS:");
 		printMazePath();
-		System.out.println("\n DFS:");
+		System.out.println("\n BFS:");
 		printMazeShortest();
 		
 	}
