@@ -14,19 +14,19 @@ public class Maze {
 	Stack<Cell> cellLocations;
 	int visited;
 	Cell current;
-	//List<Cell> allCells;
+	List<Cell> allCells;
 	
 	public Maze(int r) {
 		this.r=r;
 		time=0;
 		this.visited=1;
-		//allCells=new ArrayList<>();
+		allCells=new ArrayList<>();
 		
 		maze=new Cell[r][r];
 		for(int i=0;i<r;i++) {
 			for(int j=0;j<r;j++) {
 				maze[i][j]=new Cell(i,j);
-				//allCells.add(maze[i][j]);
+				allCells.add(maze[i][j]);
 			}
 		}
 		
@@ -310,7 +310,7 @@ public class Maze {
 		}
 		//backtrack 
 		Cell last=maze[r-1][r-1];
-		while(last!=maze[0][0]) {
+		while(!last.equals(allCells.get(0))) {
 			last.shortest=true;
 			last=last.parent;
 		}
