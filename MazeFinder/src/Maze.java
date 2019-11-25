@@ -1,6 +1,7 @@
 
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -363,43 +364,33 @@ public class Maze {
 	
 	
 	////////////////////////////////////////////////////////////////
-	/*public void readMazeFile(BufferedReader readMaze) throws IOException {
-		
-		Maze rMaze=new Maze(r);
-		for(int i=0;i<r;i++) {
-			String[] line;
-			testLine=readMaze.readLine();
+	public void readMazeFile(String fileName) throws IOException {
+		BufferedReader br=new BufferedReader(new FileReader(fileName));
+		String testLine = br.readLine();
+		testLine=br.readLine();
+		String[] line;
+		for(int i=0;i<maze.length;i++) {
+			testLine=br.readLine();
 			line=testLine.split("");
-			for(int j=0;j<r;j++) {
-				if(line[j*2+1].equals(" ")) {
-					if(i==0)
-						rMaze.maze[i][j].top=false;
-					else {
-						rMaze.maze[i][j].top=false;
-						rMaze.maze[i-1][j].bottom=false;
+			for(int j=1;j<maze[0].length;j++) {
+				if(line[j*2].equals(" ")){
+					maze[i][j-1].right=false;
+					maze[i][j].left=false;
+				}
+			}
+			testLine=br.readLine();
+			line=testLine.split("");
+			for(int j=1;j<maze[0].length;j++) {
+				if(line[j*2].equals(" ")){
+					maze[i][j-1].bottom=false;
+					if(!(i==maze.length-1))
+						maze[i][j].top=false;
 					}
 			}
-				
+			maze[r-1][r-1].bottom=false;
 		}
-			testLine=readMaze.readLine();
-			line=testLine.split("");
-			for(int j=0;j<r;j++) {
-				if(line[j*2].equals(" ")) {
-					if(j==0)
-						rMaze.maze[i][j].left=false;
-					else {
-						rMaze.maze[i][j].left=false;
-						rMaze.maze[i][j-1].right=false;
-					}
-			}
-				
-		}
-			
 	}
-		rMaze.maze[r-1][r-1].bottom=false;
-		rMaze.printMaze();
-	}
-	*/
+	
 	
 	
 		

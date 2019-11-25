@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import org.junit.jupiter.api.Test;
 
+
 class MazeTester {
 
 	@Test
@@ -59,13 +60,20 @@ class MazeTester {
 		
 		
 		//2. Reading from sample files and solving
-		/*BufferedReader testCase1=new BufferedReader(new FileReader("max4.txt"));
-		
-		String testLine = testCase1.readLine();
-		String[] dimensions=testLine.split("\\s+");
-		int r=Integer.parseInt(dimensions[0]);
-		Maze tester5=new Maze(r);
-		*/
+				BufferedReader testCase1=new BufferedReader(new FileReader("maze4.txt"));
+				String testLine = testCase1.readLine();
+				String[] dimensions=testLine.split("\\s+");
+				int r=Integer.parseInt(dimensions[0]);
+				Maze readTest1=new Maze(r);
+				readTest1.readMazeFile("maze4.txt");
+				readTest1.printMaze();
+				
+				//instead of printing we need to read each line and compare it with 
+				//the output maze so readTest1 and see if it matches input.
+				
+				//and we need to run dfs and bfs on it and print those mazes
+				
+				//and then do it for the rest
 		
 		
 		
