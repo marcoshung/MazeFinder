@@ -1,3 +1,7 @@
+//HEADER
+//tests simples cases of maze and dfs and bfs 
+//tests given input files
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.BufferedReader;
@@ -15,12 +19,23 @@ class MazeTester {
 
 	@Test
 	void test() throws IOException {
+		
 		//1. Simple Cases
+		
 		//Testing if perfect maze generated with r=2,4,5,8
+		//Input: r(dimension)
+		//Output: into output file, a. perfect random maze, b. dfs's ordered maze and shortest path
+		//c. bfs's ordered maze and shortest path
 		
 		//a. generate random maze when r=2
+		
+		//create new maze object
 		Maze tester1a=new Maze(2);
+		
+		//generate maze
 		tester1a.generateMaze();
+		
+		//initialize write, write into output file
 		BufferedWriter writer2 = new BufferedWriter(new FileWriter("simpleCase2Output.txt"));
 		System.out.println("\nRandom Perfect Maze size=2:");
 		writer2.write("\nRandom Perfect Maze size=2:\n");
@@ -79,15 +94,25 @@ class MazeTester {
 		writer8.write("\n MAZE COMPLETED!\n");
 		writer8.close();
 		
-		 
+		 /////////////////////////////////////////////////////////////////////////////
+		
 		//2. Reading from sample files and solving
 		
-		//2a. maze4.txt
+		//2a. Input: maze4.txt
+		//	  Output: maze4Output.txt
+		
+		//readers from input file
 		BufferedReader testCase1=new BufferedReader(new FileReader("maze4.txt"));
 		String testLine = testCase1.readLine();
 		String[] dimensions=testLine.split("\\s+");
+		
+		//first line of input file has dimension
 		int r=Integer.parseInt(dimensions[0]);
+		
+		//creates maze
 		Maze readTest1=new Maze(r);
+		
+		//intializes writer for output file
 		BufferedWriter writerMaze4 = new BufferedWriter(new FileWriter("maze4Output.txt"));
 		writerMaze4.write("\n Input: maze4.txt \n");
 		readTest1.readMazeFile("maze4.txt");
@@ -102,8 +127,9 @@ class MazeTester {
 		writerMaze4.write("\n MAZE COMPLETED!\n");
 		writerMaze4.close();
 		
+		//2b. Input: maze6.txt
+		//	  Output: maze6Output.txt
 		
-		//2b. maze6.txt
 		BufferedReader testCase2=new BufferedReader(new FileReader("maze6.txt"));
 		String testLine2 = testCase2.readLine();
 		String[] dimensions2=testLine2.split("\\s+");
@@ -124,7 +150,9 @@ class MazeTester {
 		writerMaze6.close();
 		
 		
-		//2c. maze8.txt
+		//2c. Input: maze8.txt
+		//	  Output: maze8Output.txt
+		
 		BufferedReader testCase3=new BufferedReader(new FileReader("maze8.txt"));
 		String testLine3 = testCase3.readLine();
 		String[] dimensions3=testLine3.split("\\s+");
@@ -145,7 +173,9 @@ class MazeTester {
 		writerMaze8.close();
 		
 		
-		//2d. maze10.txt
+		//2a. Input: maze10.txt
+		//	  Output: maze10Output.txt
+		
 		BufferedReader testCase4=new BufferedReader(new FileReader("maze10.txt"));
 		String testLine4 = testCase4.readLine();
 		String[] dimensions4=testLine4.split("\\s+");
@@ -165,7 +195,8 @@ class MazeTester {
 		writerMaze10.write("\n MAZE COMPLETED!\n");
 		writerMaze10.close();
 		
-		//2e. maze20.txt
+		//2a. Input: maze20.txt
+		//	  Output: maze20Output.txt
 		BufferedReader testCase5=new BufferedReader(new FileReader("maze20.txt"));
 		String testLine5 = testCase5.readLine();
 		String[] dimensions5=testLine5.split("\\s+");
@@ -185,8 +216,7 @@ class MazeTester {
 		writerMaze20.write("\n MAZE COMPLETED!\n");
 		writerMaze20.close();
 
-		
-
+	
 	}
 
 }

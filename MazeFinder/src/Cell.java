@@ -1,3 +1,6 @@
+//HEADER
+//Cell object represents one box in maze
+
 import java.util.LinkedList;
 
 //represents on cell in the maze
@@ -12,8 +15,9 @@ public class Cell {
 	boolean right;
 	boolean left;
 	
-	//for solving in DFS
+	//for solving in DFS and BFS
 	String color;
+	//to find shortest path, points to parent
 	Cell parent;
 	
 	//order discovered
@@ -26,10 +30,14 @@ public class Cell {
 	public Cell(int x, int y) {
 		this.x=x;
 		this.y=y;
+		
+		//all walls are up initially
 		this.top=true;
 		this.bottom=true;
 		this.left=true;
 		this.right=true;
+		
+		//none discovered so white
 		color="white";
 		parent=null;
 		shortest=false;
