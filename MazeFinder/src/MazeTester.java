@@ -1,7 +1,9 @@
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import org.junit.jupiter.api.Test;
@@ -19,145 +21,170 @@ class MazeTester {
 		//a. generate random maze when r=2
 		Maze tester1a=new Maze(2);
 		tester1a.generateMaze();
+		BufferedWriter writer2 = new BufferedWriter(new FileWriter("simpleCase2Output.txt"));
 		System.out.println("\nRandom Perfect Maze size=2:");
-		tester1a.printMaze();
+		writer2.write("\nRandom Perfect Maze size=2:\n");
+		tester1a.printMaze(writer2);
 		
-		tester1a.BFS();
-		tester1a.DFS();
+		tester1a.BFS(writer2);
+		tester1a.DFS(writer2);
 		
 		System.out.println("\n MAZE COMPLETED!");
+		writer2.write("\n MAZE COMPLETED!\n");
+		writer2.close();
+		
 		
 		//b. generate random maze when r=4
 		Maze tester1b=new Maze(4);
 		tester1b.generateMaze();
+		BufferedWriter writer4 = new BufferedWriter(new FileWriter("simpleCase4Output.txt"));
 		System.out.println("\nRandom Perfect Maze size=4:");
-		tester1b.printMaze();
+		writer4.write("\nRandom Perfect Maze size=4:\n");
+		tester1b.printMaze(writer4);
 		
-		tester1b.BFS();
-		tester1b.DFS();
+		tester1b.BFS(writer4);
+		tester1b.DFS(writer4);
 		
 		System.out.println("\n MAZE COMPLETED!");
+		writer4.write("\n MAZE COMPLETED!\n");
+		writer4.close();
 		
 		//c. generate random maze when r=5
 		Maze tester1c=new Maze(5);
 		tester1c.generateMaze();
+		BufferedWriter writer5 = new BufferedWriter(new FileWriter("simpleCase5Output.txt"));
 		System.out.println("\nRandom Perfect Maze size=5:");
-		tester1c.printMaze();
+		writer5.write("\nRandom Perfect Maze size=5:\n");
+		tester1c.printMaze(writer5);
 		
-		tester1c.BFS();
-		tester1c.DFS();
+		tester1c.BFS(writer5);
+		tester1c.DFS(writer5);
 		
 		System.out.println("\n MAZE COMPLETED!");
+		writer5.write("\n MAZE COMPLETED!\n");
+		writer5.close();
 		
 		//d. generate random maze when r=8
 		Maze tester1d=new Maze(8);
 		tester1d.generateMaze();
 		System.out.println("\nRandom Perfect Maze size=8:");
-		tester1d.printMaze();
+		BufferedWriter writer8 = new BufferedWriter(new FileWriter("simpleCase8Output.txt"));
+		writer8.write("\nRandom Perfect Maze size=8:\n");
+		tester1d.printMaze(writer8);
 		
-		tester1d.BFS();
-		tester1d.DFS();
+		tester1d.BFS(writer8);
+		tester1d.DFS(writer8);
 		
 		System.out.println("\n MAZE COMPLETED!");
+		writer8.write("\n MAZE COMPLETED!\n");
+		writer8.close();
 		
-		
+		 
 		//2. Reading from sample files and solving
 		
 		//2a. maze4.txt
-		System.out.println("Input File: maze4.txt");
 		BufferedReader testCase1=new BufferedReader(new FileReader("maze4.txt"));
 		String testLine = testCase1.readLine();
 		String[] dimensions=testLine.split("\\s+");
 		int r=Integer.parseInt(dimensions[0]);
 		Maze readTest1=new Maze(r);
+		BufferedWriter writerMaze4 = new BufferedWriter(new FileWriter("maze4Output.txt"));
+		writerMaze4.write("\n Input: maze4.txt \n");
 		readTest1.readMazeFile("maze4.txt");
-		System.out.println("Maze: ");
-		readTest1.printMaze();
+		writerMaze4.write("Maze: \n");
+		readTest1.printMaze(writerMaze4);
 		
 		//run and print dfs and bfs
-		readTest1.DFS();
-		readTest1.BFS();
+		readTest1.DFS(writerMaze4);
+		readTest1.BFS(writerMaze4);
+		
+		System.out.println("\n MAZE COMPLETED!");
+		writerMaze4.write("\n MAZE COMPLETED!\n");
+		writerMaze4.close();
+		
 		
 		//2b. maze6.txt
-		System.out.println("\nInput File: maze6.txt");
 		BufferedReader testCase2=new BufferedReader(new FileReader("maze6.txt"));
 		String testLine2 = testCase2.readLine();
 		String[] dimensions2=testLine2.split("\\s+");
 		int r2=Integer.parseInt(dimensions2[0]);
 		Maze readTest2=new Maze(r2);
+		BufferedWriter writerMaze6 = new BufferedWriter(new FileWriter("maze6Output.txt"));
+		writerMaze6.write("\n Input: maze6.txt \n");
 		readTest2.readMazeFile("maze6.txt");
-		System.out.println("Maze: ");
-		readTest2.printMaze();
+		writerMaze6.write("Maze: \n");
+		readTest2.printMaze(writerMaze6);
 		
 		//run and print dfs and bfs
-		readTest2.DFS();
-		readTest2.BFS();
+		readTest2.DFS(writerMaze6);
+		readTest2.BFS(writerMaze6);
+		
+		System.out.println("\n MAZE COMPLETED!");
+		writerMaze6.write("\n MAZE COMPLETED!\n");
+		writerMaze6.close();
 		
 		
 		//2c. maze8.txt
-		System.out.println("\nInput File: maze8.txt");
 		BufferedReader testCase3=new BufferedReader(new FileReader("maze8.txt"));
 		String testLine3 = testCase3.readLine();
 		String[] dimensions3=testLine3.split("\\s+");
 		int r3=Integer.parseInt(dimensions3[0]);
 		Maze readTest3=new Maze(r3);
+		BufferedWriter writerMaze8 = new BufferedWriter(new FileWriter("maze8Output.txt"));
+		writerMaze8.write("\n Input: maze8.txt \n");
 		readTest3.readMazeFile("maze8.txt");
-		System.out.println("Maze: ");
-		readTest3.printMaze();
+		writerMaze8.write("Maze: \n");
+		readTest3.printMaze(writerMaze8);
 		
 		//run and print dfs and bfs
-		readTest3.DFS();
-		readTest3.BFS();
+		readTest3.DFS(writerMaze8);
+		readTest3.BFS(writerMaze8);
+		
+		System.out.println("\n MAZE COMPLETED!");
+		writerMaze8.write("\n MAZE COMPLETED!\n");
+		writerMaze8.close();
 		
 		
 		//2d. maze10.txt
-		System.out.println("Input File: maze10.txt");
 		BufferedReader testCase4=new BufferedReader(new FileReader("maze10.txt"));
 		String testLine4 = testCase4.readLine();
 		String[] dimensions4=testLine4.split("\\s+");
 		int r4=Integer.parseInt(dimensions4[0]);
 		Maze readTest4=new Maze(r4);
+		BufferedWriter writerMaze10 = new BufferedWriter(new FileWriter("maze10Output.txt"));
+		writerMaze10.write("\n Input: maze10.txt \n");
 		readTest4.readMazeFile("maze10.txt");
-		System.out.println("Maze: ");
-		readTest4.printMaze();
+		writerMaze10.write("Maze: \n");
+		readTest4.printMaze(writerMaze10);
 		
 		//run and print dfs and bfs
-		readTest4.DFS();
-		readTest4.BFS();
+		readTest4.DFS(writerMaze10);
+		readTest4.BFS(writerMaze10);
+		
+		System.out.println("\n MAZE COMPLETED!");
+		writerMaze10.write("\n MAZE COMPLETED!\n");
+		writerMaze10.close();
 		
 		//2e. maze20.txt
-		System.out.println("Input File: maze20.txt");
 		BufferedReader testCase5=new BufferedReader(new FileReader("maze20.txt"));
 		String testLine5 = testCase5.readLine();
 		String[] dimensions5=testLine5.split("\\s+");
 		int r5=Integer.parseInt(dimensions5[0]);
 		Maze readTest5=new Maze(r5);
+		BufferedWriter writerMaze20 = new BufferedWriter(new FileWriter("maze20Output.txt"));
+		writerMaze20.write("\n Input: maze20.txt \n");
 		readTest5.readMazeFile("maze20.txt");
-		System.out.println("Maze: ");
-		readTest5.printMaze();
+		writerMaze20.write("Maze: \n");
+		readTest5.printMaze(writerMaze20);
 		
 		//run and print dfs and bfs
-		readTest5.DFS();
-		readTest5.BFS();
+		readTest5.DFS(writerMaze20);
+		readTest5.BFS(writerMaze20);
 		
-		
-	
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-				
-				
-		
-		
-		
-		
+		System.out.println("\n MAZE COMPLETED!");
+		writerMaze20.write("\n MAZE COMPLETED!\n");
+		writerMaze20.close();
+
 		
 
 	}

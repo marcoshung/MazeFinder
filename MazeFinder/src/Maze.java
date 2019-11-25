@@ -1,7 +1,9 @@
 
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -115,138 +117,179 @@ public class Maze {
 	}
 	*/
 	
-	public void printMaze() {
+	public void printMaze(BufferedWriter writer) throws IOException {
 		for(int i = 0; i < maze.length;i++) {
 			for(int j = 0; j < maze.length; j++) {
 				System.out.print("+");
+				writer.write("+");
 				if(maze[i][j].top == true) {
 					System.out.print("-");
+					writer.write("-");
 				}else {
 					System.out.print(" ");
+					writer.write(" ");
 				}
 			}
 
 			System.out.print("+");
+			writer.write("+");
 			System.out.println();
+			writer.write("\n");
 			for(int j = 0; j < maze.length; j++) {
 				if(maze[i][j].left == false) {
 					System.out.print(" ");
+					writer.write(" ");
 				}
 				else if(maze[i][j].left == true) {
 					System.out.print("|");
+					writer.write("|");
 				}
 				System.out.print(" ");
+				writer.write(" ");
 			}
 			
 			
 			if(maze[i][maze[i].length - 1].right == true) {
 				System.out.print("|");
+				writer.write("|");
 			}
 			System.out.println();
+			writer.write("\n");
 		}
 		for(int i = 0; i < maze[maze.length - 1].length; i++) {
 			System.out.print("+");
+			writer.write("+");
 			if(maze[maze.length -1][i].bottom == true) {
 				System.out.print("-");
+				writer.write("-");
 			}else {
 				System.out.print(" ");
+				writer.write(" ");
 			}
 		}
 		System.out.print("+");
-		
-		
+		writer.write("+");
 	}
 	
 	//can also do mod
-	public void printMazePath() {
+	public void printMazePath(BufferedWriter writer) throws IOException {
 		for(int i = 0; i < maze.length;i++) {
 			for(int j = 0; j < maze.length; j++) {
 				System.out.print("+");
+				writer.write("+");
 				if(maze[i][j].top == true) {
 					System.out.print("-");
+					writer.write("-");
 				}else {
 					System.out.print(" ");
+					writer.write(" ");
 				}
 			}
 
 			System.out.print("+");
+			writer.write("+");
 			System.out.println();
+			writer.write("\n");
 			for(int j = 0; j < maze.length; j++) {
 				if(maze[i][j].left == false) {
 					System.out.print(" ");
+					writer.write(" ");
 				}
 				else if(maze[i][j].left == true) {
 					System.out.print("|");
+					writer.write("|");
 				}
 				if(maze[i][j].disc!=0) {
 					System.out.print(maze[i][j].disc%10);
+					writer.write(Integer.toString(maze[i][j].disc%10));
 				}	
-				else
+				else {
 					System.out.print(" ");
+					writer.write(" ");
+				}
+				
 			}
 			
 			
 			if(maze[i][maze[i].length - 1].right == true) {
 				System.out.print("|");
+				writer.write("|");
 			}
 			System.out.println();
+			writer.write("\n");
 		}
 		for(int i = 0; i < maze[maze.length - 1].length; i++) {
 			System.out.print("+");
+			writer.write("+");
 			if(maze[maze.length -1][i].bottom == true) {
 				System.out.print("-");
+				writer.write("-");
 			}else {
 				System.out.print(" ");
+				writer.write(" ");
 			}
 		}
 		System.out.print("+");
-		
-		
+		writer.write("+");
 	}
 	
-	public void printMazeShortest() {
+	public void printMazeShortest(BufferedWriter writer) throws IOException {
 		for(int i = 0; i < maze.length;i++) {
 			for(int j = 0; j < maze.length; j++) {
 				System.out.print("+");
+				writer.write("+");
 				if(maze[i][j].top == true) {
 					System.out.print("-");
+					writer.write("-");
 				}else {
 					System.out.print(" ");
+					writer.write(" ");
 				}
 			}
 
 			System.out.print("+");
+			writer.write("+");
 			System.out.println();
+			writer.write("\n");
 			for(int j = 0; j < maze.length; j++) {
 				if(maze[i][j].left == false) {
 					System.out.print(" ");
+					writer.write(" ");
 				}
 				else if(maze[i][j].left == true) {
 					System.out.print("|");
+					writer.write("|");
 				}
-				if(maze[i][j].shortest) 
+				if(maze[i][j].shortest) {
 					System.out.print("#");
-				else
+					writer.write("#");
+				} else {
 					System.out.print(" ");
+					writer.write(" ");
+				}
 			}
 			
 			
 			if(maze[i][maze[i].length - 1].right == true) {
 				System.out.print("|");
+				writer.write("|");
 			}
 			System.out.println();
+			writer.write("\n");
 		}
 		for(int i = 0; i < maze[maze.length - 1].length; i++) {
 			System.out.print("+");
+			writer.write("+");
 			if(maze[maze.length -1][i].bottom == true) {
 				System.out.print("-");
+				writer.write("-");
 			}else {
 				System.out.print(" ");
+				writer.write(" ");
 			}
 		}
 		System.out.print("+");
-		
-		
+		writer.write("+");
 	}
 	
 	public List<Cell> findAdjacent(Cell c){
@@ -268,7 +311,7 @@ public class Maze {
 	
 	
 	
-	public  void DFS() {
+	public  void DFS(BufferedWriter writer) throws IOException {
 	///reset
 		time=0;
 			for(int i=0;i<maze.length;i++) {
@@ -308,16 +351,19 @@ public class Maze {
 		last.shortest=true;
 		
 		System.out.println("\n\n DFS:");
-		printMazePath();
+		writer.write("\n\n DFS:\n");
+		printMazePath(writer);
 		System.out.println("\n");
-		printMazeShortest();
+		writer.write("\n");
+		writer.write("\n Shortest Path:\n");
+		printMazeShortest(writer);
 		
 	}
 
 	////////////////////////////////////////////////////////////////////
 	//BFS Solution
 	
-	public  void BFS() {
+	public  void BFS(BufferedWriter writer) throws IOException {
 		
 		///reset
 		time=0;
@@ -357,9 +403,12 @@ public class Maze {
 		last.shortest=true;
 		
 		System.out.println("\n\n BFS:");
-		printMazePath();
+		writer.write("\n\n BFS:\n");
+		printMazePath(writer);
 		System.out.println("\n");
-		printMazeShortest();
+		writer.write("\n");
+		writer.write("\n Shortest Path:\n");
+		printMazeShortest(writer);
 		
 	}
 	
