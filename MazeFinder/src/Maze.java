@@ -74,7 +74,7 @@ public class Maze {
 		rand.setSeed(20);
 		
 		//while all cells have not been visited, finds neighbors of current cell
-		//which have all 4 walls up, picks random neighbor, knocks down wall between
+		//which have all four walls up, picks random neighbor, knocks down wall between
 		//them, updates current to next cell, increases visited and pushes in current.
 		while(visited<numCells) {
 			List<Cell> neighbors=findNeighbors(current);
